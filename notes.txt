@@ -1,0 +1,27 @@
+Client folder is going to hold all of our frontend code. We created the folder, navigated inside of it and ran "create react app ."  The period after it puts it into the folder you're in. In the resulting package.json (the one in the client folder) we add the line "proxy": "http://localhost:5000" so that whenever we call say 'api/items' it knows to go to http://localhost:5000/api/items. You can run npm start to start the front end and go into the main folder and run node server. But there's an easier way to run start both the front end and backend at the same time. You can use concurrently. cd back to the main folder, outside of the client folder. Go into the package.json of the backend and add  "client": "npm start --prefix client" and "dev": "concurrently \"npm run server\" \"npm run client\"" to the "scripts". Adding     "client-install": "npm install --prefix client"  to the scripts will npm install all dependencies that need to go into the client node modules into that so they don't need to go into that folder to do a separate npm install for client side stuff.
+
+So now, we can just run "npm run dev" and it should do both.
+
+REDUX
+Lot of boilerplate. helps for lots of state interacting with each other. each component has its own state. each holds its own data. large applications can get messy. state managers help with this. redux is one of these most common state managers. you don't change state in this case it's recreated? state is immutable. it gets recreated as new state. The View (component) sends an action (like a click event) to the Action Creator. this dispatch (action) goes to the Store. The Store gets sends the previous state and the action to the Reducer which changes it to the new state that gets sent back to the Store. It then gets sent back to the View (the component). This now becomes the current state. 
+
+In itemReducer.js we had the initialState set to this
+const initialState = {
+  items: [
+    { id: uuid(), name: "Eggs" },
+    { id: uuid(), name: "Milk" },
+    { id: uuid(), name: "Steak" },
+    { id: uuid(), name: "Water" },
+  ],
+};
+Now that we're connecting to a database, we'll empty that array out to be
+const initialState = {
+  items: [],
+};
+
+then we'll get the items from the database
+
+When we run "npm run build" it packs it all up into the build folder
+"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+ gets added to package.json of the server (not the react client side). this allows it to be built for heroku
+
