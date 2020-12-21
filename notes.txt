@@ -25,3 +25,7 @@ When we run "npm run build" it packs it all up into the build folder
 "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
  gets added to package.json of the server (not the react client side). this allows it to be built for heroku
 
+
+STORING ENV VARIABLES
+=================================================================================
+https://medium.com/developer-secrets/storing-credentials-the-right-way-78074ae21727

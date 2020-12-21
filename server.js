@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const items = require("./routes/api/items");
 const app = express();
+require("dotenv").config();
+console.log("************************");
+console.log(process.env.DB_USERNAME);
+console.log("************************");
 
 // BodyParser Middleware
 app.use(bodyParser.json());
